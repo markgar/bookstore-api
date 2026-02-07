@@ -29,7 +29,7 @@
 
 ## Phase 5: Bug Fixes
 
-- [ ] 10. Fix the thread-safety bug in `BookService.Update` (documented in BUGS.md): the current implementation uses `ContainsKey` followed by a separate indexer assignment (`_books[id] = book`), which is a non-atomic check-then-act pattern. A concurrent `Delete` between the check and the assignment can re-insert a deleted book. Replace with an atomic `ConcurrentDictionary` pattern — use `TryGetValue` to check existence, then `TryUpdate` to atomically swap the old value for the new one. This ensures the update only succeeds if the key still exists with the expected value. Verify the fix builds with `dotnet build`.
+- [x] 10. Fix the thread-safety bug in `BookService.Update` (documented in BUGS.md): the current implementation uses `ContainsKey` followed by a separate indexer assignment (`_books[id] = book`), which is a non-atomic check-then-act pattern. A concurrent `Delete` between the check and the assignment can re-insert a deleted book. Replace with an atomic `ConcurrentDictionary` pattern — use `TryGetValue` to check existence, then `TryUpdate` to atomically swap the old value for the new one. This ensures the update only succeeds if the key still exists with the expected value. Verify the fix builds with `dotnet build`.
 
 ## Phase 6: Program.cs & DI Registration
 
