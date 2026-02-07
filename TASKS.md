@@ -19,7 +19,7 @@
 
 ## Phase 4: Controller
 
-- [ ] 9. Create `src/BookstoreApi/Controllers/BooksController.cs` with `[ApiController]` and `[Route("api/books")]` attributes. Inject `IBookService` via constructor. Implement all five endpoints delegating to the service:
+- [x] 9. Create `src/BookstoreApi/Controllers/BooksController.cs` with `[ApiController]` and `[Route("api/books")]` attributes. Inject `IBookService` via constructor. Implement all five endpoints delegating to the service:
   - `GET /api/books` → 200 with list of books
   - `GET /api/books/{id}` → 200 with book, or 404 if not found
   - `POST /api/books` → 201 with created book and `Location` header (use `CreatedAtAction`)
