@@ -2,7 +2,7 @@
 
 ## Phase 1: Project Scaffolding
 
-- [ ] 1. Create the solution file `BookstoreApi.sln` at the repository root.
+- [x] 1. Create the solution file `BookstoreApi.sln` at the repository root.
 - [ ] 2. Create the API project at `src/BookstoreApi/BookstoreApi.csproj` targeting `net8.0`, and add it to the solution. Include NuGet package references needed (e.g., `Microsoft.AspNetCore.OpenApi` is optional but no extra effort needed).
 - [ ] 3. Create the test project at `tests/BookstoreApi.Tests/BookstoreApi.Tests.csproj` targeting `net8.0` with references to xUnit, FluentAssertions, Microsoft.AspNetCore.Mvc.Testing, and a project reference to the API project. Add it to the solution.
 - [ ] 4. Verify the solution builds successfully with `dotnet build`.
