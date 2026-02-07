@@ -33,8 +33,8 @@
 
 ## Phase 6: Program.cs & DI Registration
 
-- [ ] 11. Update `src/BookstoreApi/Program.cs`: register `BookService` as a singleton implementation of `IBookService` via `builder.Services.AddSingleton<IBookService, BookService>()`. The file already has `builder.Services.AddControllers()` and `app.MapControllers()` — keep those. Remove the `app.UseHttpsRedirection()` line (not needed; Docker will serve over HTTP on port 8080). Remove `app.UseAuthorization()` (auth is out of scope). Ensure the app listens on port 8080 for Docker compatibility (set via `ASPNETCORE_URLS` environment variable in the Dockerfile or via `builder.WebHost.UseUrls("http://+:8080")` in code). Add `public partial class Program { }` at the bottom of `Program.cs` so the test project can use `WebApplicationFactory<Program>`.
-- [ ] 12. Verify the solution builds and the API starts locally with `dotnet run --project src/BookstoreApi` responding on port 8080. Test with a quick `curl http://localhost:8080/api/books` or equivalent to confirm a 200 response with `[]`.
+- [x] 11. Update `src/BookstoreApi/Program.cs`: register `BookService` as a singleton implementation of `IBookService` via `builder.Services.AddSingleton<IBookService, BookService>()`. The file already has `builder.Services.AddControllers()` and `app.MapControllers()` — keep those. Remove the `app.UseHttpsRedirection()` line (not needed; Docker will serve over HTTP on port 8080). Remove `app.UseAuthorization()` (auth is out of scope). Ensure the app listens on port 8080 for Docker compatibility (set via `ASPNETCORE_URLS` environment variable in the Dockerfile or via `builder.WebHost.UseUrls("http://+:8080")` in code). Add `public partial class Program { }` at the bottom of `Program.cs` so the test project can use `WebApplicationFactory<Program>`.
+- [x] 12. Verify the solution builds and the API starts locally with `dotnet run --project src/BookstoreApi` responding on port 8080. Test with a quick `curl http://localhost:8080/api/books` or equivalent to confirm a 200 response with `[]`.
 
 ## Phase 7: Unit Tests
 
