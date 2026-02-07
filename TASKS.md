@@ -38,7 +38,7 @@
 
 ## Phase 7: Unit Tests
 
-- [ ] 13. Create `tests/BookstoreApi.Tests/BookServiceTests.cs` with xUnit tests using FluentAssertions, covering all 8 required scenarios:
+- [x] 13. Create `tests/BookstoreApi.Tests/BookServiceTests.cs` with xUnit tests using FluentAssertions, covering all 8 required scenarios:
   1. Adding a book returns the book with a generated Id (Id > 0).
   2. GetAll returns all added books.
   3. GetById with a valid Id returns the correct book.
