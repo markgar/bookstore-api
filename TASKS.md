@@ -14,7 +14,7 @@
 
 ## Phase 3: Service Layer
 
-- [ ] 7. Create `src/BookstoreApi/Services/IBookService.cs` with the `IBookService` interface defining methods: `IEnumerable<Book> GetAll()`, `Book? GetById(int id)`, `Book Add(Book book)`, `bool Update(int id, Book book)`, `bool Delete(int id)`. Add XML doc comments.
+- [x] 7. Create `src/BookstoreApi/Services/IBookService.cs` with the `IBookService` interface defining methods: `IEnumerable<Book> GetAll()`, `Book? GetById(int id)`, `Book Add(Book book)`, `bool Update(int id, Book book)`, `bool Delete(int id)`. Add XML doc comments.
 - [ ] 8. Create `src/BookstoreApi/Services/BookService.cs` implementing `IBookService` using a thread-safe `ConcurrentDictionary<int, Book>` as the in-memory store. Auto-generate IDs using `Interlocked.Increment` (starting from 0 so first book gets Id 1). Ensure all methods are thread-safe. `GetAll()` returns all values, `GetById()` returns null if not found, `Update()` returns false if Id not found, `Delete()` returns false if Id not found.
 
 ## Phase 4: Controller
