@@ -47,13 +47,56 @@ docker run -p 8080:8080 bookstore-api
 
 ## API Endpoints
 
-| Method | Endpoint         | Description        |
-|--------|------------------|--------------------|
-| GET    | /api/books       | List all books     |
-| GET    | /api/books/{id}  | Get a book by ID   |
-| POST   | /api/books       | Create a new book  |
-| PUT    | /api/books/{id}  | Update a book      |
-| DELETE | /api/books/{id}  | Delete a book      |
+| Method | Endpoint         | Description        | Success Status | Error Status              |
+|--------|------------------|--------------------|----------------|---------------------------|
+| GET    | /api/books       | List all books     | 200 OK         | —                         |
+| GET    | /api/books/{id}  | Get a book by ID   | 200 OK         | 404 Not Found             |
+| POST   | /api/books       | Create a new book  | 201 Created    | 400 Bad Request           |
+| PUT    | /api/books/{id}  | Update a book      | 204 No Content | 400 Bad Request, 404 Not Found |
+| DELETE | /api/books/{id}  | Delete a book      | 204 No Content | 404 Not Found             |
+
+### Book JSON Schema
+
+```json
+{
+  "id": 1,
+  "title": "string (required, max 200)",
+  "author": "string (required, max 150)",
+  "isbn": "string (required, 13 digits)",
+  "price": 9.99,
+  "genre": "string (required, max 50)"
+}
+```
+
+## Project Structure
+
+```
+builder/
+├── .github/
+│   └── workflows/
+│       └── ci.yml
+├── src/
+│   └── BookstoreApi/
+│       ├── Controllers/
+│       │   └── BooksController.cs
+│       ├── Models/
+│       │   └── Book.cs
+│       ├── Services/
+│       │   ├── IBookService.cs
+│       │   └── BookService.cs
+│       ├── Program.cs
+│       └── BookstoreApi.csproj
+├── tests/
+│   └── BookstoreApi.Tests/
+│       ├── BooksControllerTests.cs
+│       ├── BookServiceTests.cs
+│       └── BookstoreApi.Tests.csproj
+├── Dockerfile
+├── .gitignore
+├── README.md
+├── SPEC.md
+└── BookstoreApi.sln
+```
 
 ## License
 
