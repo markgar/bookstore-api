@@ -73,7 +73,7 @@
 
 ## Phase 10: GitHub Actions CI Workflow
 
-- [ ] 19. Create `.github/workflows/ci.yml` with:
+- [x] 19. Create `.github/workflows/ci.yml` with:
   - **Triggers:** `push` to `main` branch and all `pull_request` events.
   - **Runner:** `ubuntu-latest`.
   - **Steps:** (1) `actions/checkout@v4`, (2) `actions/setup-dotnet@v4` with `dotnet-version: '8.0.x'`, (3) `dotnet restore`, (4) `dotnet build --configuration Release --no-restore`, (5) `dotnet test --configuration Release --no-build --verbosity normal`, (6) `docker build -t bookstore-api .`.
