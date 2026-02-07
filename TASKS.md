@@ -50,7 +50,7 @@
 
 ## Phase 8: Integration Tests
 
-- [ ] 14. Create `tests/BookstoreApi.Tests/BooksControllerTests.cs` using `WebApplicationFactory<Program>` and xUnit with FluentAssertions to test all 10 required integration scenarios:
+- [x] 14. Create `tests/BookstoreApi.Tests/BooksControllerTests.cs` using `WebApplicationFactory<Program>` and xUnit with FluentAssertions to test all 10 required integration scenarios:
   1. GET /api/books returns 200 and an empty JSON array when no books exist.
   2. POST /api/books with valid data returns 201, the created book in the body, and a Location header.
   3. POST /api/books with invalid data returns 400 — test at least three sub-cases: missing required fields, invalid ISBN (non-13-digit), and negative/zero price.
@@ -61,7 +61,7 @@
   8. PUT /api/books/{id} with invalid data (missing required fields, bad ISBN, negative price) returns 400.
   9. DELETE /api/books/{id} with a valid Id returns 204.
   10. DELETE /api/books/{id} with a non-existent Id returns 404.
-- [ ] 15. Run `dotnet test` and verify all unit and integration tests pass with zero failures.
+- [x] 15. Run `dotnet test` and verify all unit and integration tests pass with zero failures.
 
 ## Phase 9: Dockerfile & .dockerignore
 
