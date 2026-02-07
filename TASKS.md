@@ -65,7 +65,7 @@
 
 ## Phase 9: Dockerfile & .dockerignore
 
-- [ ] 16. Create a `.dockerignore` file at the repository root excluding: `bin/`, `obj/`, `.git/`, `.github/`, `*.md`, `*.sln.DotSettings`, `TestResults/`, and other non-essential files.
+- [x] 16. Create a `.dockerignore` file at the repository root excluding: `bin/`, `obj/`, `.git/`, `.github/`, `*.md`, `*.sln.DotSettings`, `TestResults/`, and other non-essential files.
 - [ ] 17. Create a multi-stage `Dockerfile` at the repository root:
   - **Stage 1 (build):** Use `mcr.microsoft.com/dotnet/sdk:8.0` as the base. Copy `.sln` and all `.csproj` files first for layer caching, run `dotnet restore`. Then copy all source, run `dotnet publish -c Release -o /app/publish`.
   - **Stage 2 (runtime):** Use `mcr.microsoft.com/dotnet/aspnet:8.0` as the base. Copy published output from build stage. `EXPOSE 8080`. Set `ENV ASPNETCORE_URLS=http://+:8080`. Set `ENTRYPOINT ["dotnet", "BookstoreApi.dll"]`.
