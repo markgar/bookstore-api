@@ -4,7 +4,7 @@
 
 - [x] 1. Create the solution file `BookstoreApi.sln` at the repository root.
 - [x] 2. Remove any default scaffolding or template code from the solution file (the current `.sln` has no project references — it will be populated as projects are created in the next steps).
-- [ ] 3. Create the API project at `src/BookstoreApi/BookstoreApi.csproj` targeting `net8.0` using `dotnet new webapi` (or manually), and add it to the solution via `dotnet sln add`. Remove any template-generated scaffolding files (e.g., `WeatherForecast.cs`, sample controllers) that do not belong. Ensure the `.csproj` does not include Swagger packages unless trivially present.
+- [x] 3. Create the API project at `src/BookstoreApi/BookstoreApi.csproj` targeting `net8.0` using `dotnet new webapi` (or manually), and add it to the solution via `dotnet sln add`. Remove any template-generated scaffolding files (e.g., `WeatherForecast.cs`, sample controllers) that do not belong. Ensure the `.csproj` does not include Swagger packages unless trivially present.
 - [ ] 4. Create the test project at `tests/BookstoreApi.Tests/BookstoreApi.Tests.csproj` targeting `net8.0` using `dotnet new xunit` (or manually). Add NuGet references: `FluentAssertions`, `Microsoft.AspNetCore.Mvc.Testing`. Add a project reference to the API project. Add it to the solution via `dotnet sln add`. Remove any template-generated test files (e.g., `UnitTest1.cs`).
 - [ ] 5. Verify the solution builds successfully with `dotnet build`.
 
