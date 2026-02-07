@@ -29,7 +29,7 @@
 
 ## Phase 5: Program.cs & DI Registration
 
-- [ ] 10. Configure `src/BookstoreApi/Program.cs`: register `BookService` as a singleton implementation of `IBookService` via `builder.Services.AddSingleton<IBookService, BookService>()`. Add controllers via `builder.Services.AddControllers()`. Map controller routes via `app.MapControllers()`. Ensure the app listens on port 8080 for Docker compatibility (set via `ASPNETCORE_URLS` environment variable or `builder.WebHost.UseUrls`). Make the `Program` class accessible to the test project for `WebApplicationFactory<Program>` — either add `InternalsVisibleTo` in the `.csproj` or add a `public partial class Program { }` declaration at the bottom of `Program.cs`.
+- [ ] 10. Update `src/BookstoreApi/Program.cs`: register `BookService` as a singleton implementation of `IBookService` via `builder.Services.AddSingleton<IBookService, BookService>()`. The file already has `builder.Services.AddControllers()` and `app.MapControllers()` — keep those. Remove the `app.UseHttpsRedirection()` line (not needed; Docker will serve over HTTP on port 8080). Remove `app.UseAuthorization()` (auth is out of scope). Ensure the app listens on port 8080 for Docker compatibility (set via `ASPNETCORE_URLS` environment variable in the Dockerfile or via `builder.WebHost.UseUrls("http://+:8080")` in code). Add `public partial class Program { }` at the bottom of `Program.cs` so the test project can use `WebApplicationFactory<Program>`.
 - [ ] 11. Verify the solution builds and the API starts locally with `dotnet run --project src/BookstoreApi` responding on port 8080. Test with a quick `curl http://localhost:8080/api/books` or equivalent to confirm a 200 response with `[]`.
 
 ## Phase 6: Unit Tests
