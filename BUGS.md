@@ -1,0 +1,3 @@
+# Bugs
+
+- [ ] **BookService.Update is not thread-safe**: `Update` in `src/BookstoreApi/Services/BookService.cs` uses `ContainsKey` followed by a separate indexer assignment, which is a non-atomic check-then-act pattern. A concurrent `Delete` call between the `ContainsKey` check and the `_books[id] = book` assignment can cause the update to re-insert a just-deleted book. To reproduce: call `Update` and `Delete` for the same key concurrently in a tight loop; the book may reappear after deletion. Fix by using an atomic `ConcurrentDictionary` method such as `TryGetValue` paired with `TryUpdate`, or guard with a lock.
