@@ -23,7 +23,7 @@
   - `GET /api/books` → 200 with list of books
   - `GET /api/books/{id}` → 200 with book, or 404 if not found
   - `POST /api/books` → 201 with created book and `Location` header (use `CreatedAtAction`)
-  - `PUT /api/books/{id}` → 204 on success, 404 if not found, 400 if validation fails
+  - `PUT /api/books/{id}` → 204 on success, 404 if not found, 400 if validation fails. If the Id in the request body does not match the `{id}` in the URL, return 400.
   - `DELETE /api/books/{id}` → 204 on success, 404 if not found
   - The controller must contain no business logic — only delegation to the service.
 
@@ -46,7 +46,7 @@
 
 ## Phase 7: Integration Tests
 
-- [ ] 13. Create `tests/BookstoreApi.Tests/BooksControllerTests.cs` using `WebApplicationFactory<Program>` and xUnit with FluentAssertions to test all 9 required integration scenarios:
+- [ ] 13. Create `tests/BookstoreApi.Tests/BooksControllerTests.cs` using `WebApplicationFactory<Program>` and xUnit with FluentAssertions to test all 10 required integration scenarios:
   1. GET /api/books returns 200 and an empty JSON array when no books exist.
   2. POST /api/books with valid data returns 201, the created book in the body, and a Location header.
   3. POST /api/books with invalid data returns 400 — test at least three sub-cases: missing required fields, invalid ISBN (non-13-digit), and negative/zero price.
@@ -54,8 +54,9 @@
   5. GET /api/books/{id} with a non-existent Id returns 404.
   6. PUT /api/books/{id} with valid data returns 204 and the changes persist (verify with a subsequent GET).
   7. PUT /api/books/{id} with a non-existent Id returns 404.
-  8. DELETE /api/books/{id} with a valid Id returns 204.
-  9. DELETE /api/books/{id} with a non-existent Id returns 404.
+  8. PUT /api/books/{id} with invalid data (missing required fields, bad ISBN, negative price) returns 400.
+  9. DELETE /api/books/{id} with a valid Id returns 204.
+  10. DELETE /api/books/{id} with a non-existent Id returns 404.
 - [ ] 14. Run `dotnet test` and verify all unit and integration tests pass with zero failures.
 
 ## Phase 8: Dockerfile & .dockerignore
