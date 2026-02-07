@@ -10,7 +10,7 @@
 
 ## Phase 2: Book Model & Validation
 
-- [ ] 6. Create `src/BookstoreApi/Models/Book.cs` with the `Book` class containing properties: `Id` (int, auto-generated), `Title` (string, required, max 200), `Author` (string, required, max 150), `Isbn` (string, required, must be exactly 13 numeric digits — use `[RegularExpression(@"^\d{13}$")]`), `Price` (decimal, required, must be > 0 — use `[Range(0.01, ...)]` or a custom validation), `Genre` (string, required, max 50). Use Data Annotations for all validation. Add XML doc comments on public members per .NET conventions.
+- [x] 6. Create `src/BookstoreApi/Models/Book.cs` with the `Book` class containing properties: `Id` (int, auto-generated), `Title` (string, required, max 200), `Author` (string, required, max 150), `Isbn` (string, required, must be exactly 13 numeric digits — use `[RegularExpression(@"^\d{13}$")]`), `Price` (decimal, required, must be > 0 — use `[Range(0.01, ...)]` or a custom validation), `Genre` (string, required, max 50). Use Data Annotations for all validation. Add XML doc comments on public members per .NET conventions.
 
 ## Phase 3: Service Layer
 
