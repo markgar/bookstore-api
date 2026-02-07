@@ -11,10 +11,11 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();
+
+/// <summary>
+/// Partial class declaration to support WebApplicationFactory in integration tests.
+/// </summary>
+public partial class Program { }
