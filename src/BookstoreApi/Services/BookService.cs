@@ -28,11 +28,17 @@ public class BookService : IBookService
     /// <inheritdoc />
     public bool Update(int id, Book book)
     {
-        if (!_books.ContainsKey(id))
+        if (!_books.TryGetValue(id, out var existing))
             return false;
 
         book.Id = id;
-        _books[id] = book;
+        // Atomically replace the old value; retry if a concurrent update changed it.
+        while (!_books.TryUpdate(id, book, existing))
+        {
+            if (!_books.TryGetValue(id, out existing))
+                return false;
+        }
+
         return true;
     }
 
