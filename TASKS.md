@@ -69,7 +69,7 @@
 - [x] 17. Create a multi-stage `Dockerfile` at the repository root:
   - **Stage 1 (build):** Use `mcr.microsoft.com/dotnet/sdk:8.0` as the base. Copy `.sln` and all `.csproj` files first for layer caching, run `dotnet restore`. Then copy all source, run `dotnet publish -c Release -o /app/publish`.
   - **Stage 2 (runtime):** Use `mcr.microsoft.com/dotnet/aspnet:8.0` as the base. Copy published output from build stage. `EXPOSE 8080`. Set `ENV ASPNETCORE_URLS=http://+:8080`. Set `ENTRYPOINT ["dotnet", "BookstoreApi.dll"]`.
-- [ ] 18. Verify the Docker image builds successfully with `docker build -t bookstore-api .`.
+- [x] 18. Verify the Docker image builds successfully with `docker build -t bookstore-api .`.
 
 ## Phase 10: GitHub Actions CI Workflow
 
