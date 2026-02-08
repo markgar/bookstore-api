@@ -119,4 +119,59 @@ public class BookServiceEdgeCaseTests
 
         fetched!.Title.Should().Be("Changed");
     }
+
+    [Fact]
+    public void Add_IgnoresPreExistingIdAndAssignsNewOne()
+    {
+        var book = CreateValidBook();
+        book.Id = 999;
+
+        var result = _service.Add(book);
+
+        result.Id.Should().NotBe(999);
+        result.Id.Should().BeGreaterThan(0);
+    }
+
+    [Fact]
+    public void Update_AfterDelete_ReturnsFalse()
+    {
+        var added = _service.Add(CreateValidBook());
+        _service.Delete(added.Id);
+
+        var result = _service.Update(added.Id, CreateValidBook());
+
+        result.Should().BeFalse();
+    }
+
+    [Fact]
+    public void GetById_WithZeroId_ReturnsNull()
+    {
+        var result = _service.GetById(0);
+
+        result.Should().BeNull();
+    }
+
+    [Fact]
+    public void GetById_WithNegativeId_ReturnsNull()
+    {
+        var result = _service.GetById(-1);
+
+        result.Should().BeNull();
+    }
+
+    [Fact]
+    public void Delete_WithZeroId_ReturnsFalse()
+    {
+        var result = _service.Delete(0);
+
+        result.Should().BeFalse();
+    }
+
+    [Fact]
+    public void Delete_WithNegativeId_ReturnsFalse()
+    {
+        var result = _service.Delete(-1);
+
+        result.Should().BeFalse();
+    }
 }

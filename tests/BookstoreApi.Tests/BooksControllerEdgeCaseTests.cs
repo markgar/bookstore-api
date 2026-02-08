@@ -288,4 +288,176 @@ public class BooksControllerEdgeCaseTests : IClassFixture<WebApplicationFactory<
         var getDeleted = await _client.GetAsync($"/api/books/{id}");
         getDeleted.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
+
+    [Fact]
+    public async Task Put_WithMissingAuthor_Returns400()
+    {
+        var postResponse = await _client.PostAsJsonAsync("/api/books", CreateValidBook());
+        var created = await postResponse.Content.ReadFromJsonAsync<Book>();
+
+        var updated = new Book
+        {
+            Id = created!.Id,
+            Title = "Title",
+            Author = "",
+            Isbn = "9780306406157",
+            Price = 10.00m,
+            Genre = "Fiction"
+        };
+
+        var response = await _client.PutAsJsonAsync($"/api/books/{created.Id}", updated);
+
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
+
+    [Fact]
+    public async Task Put_WithMissingGenre_Returns400()
+    {
+        var postResponse = await _client.PostAsJsonAsync("/api/books", CreateValidBook());
+        var created = await postResponse.Content.ReadFromJsonAsync<Book>();
+
+        var updated = new Book
+        {
+            Id = created!.Id,
+            Title = "Title",
+            Author = "Author",
+            Isbn = "9780306406157",
+            Price = 10.00m,
+            Genre = ""
+        };
+
+        var response = await _client.PutAsJsonAsync($"/api/books/{created.Id}", updated);
+
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
+
+    [Fact]
+    public async Task Put_WithTitleExceedingMaxLength_Returns400()
+    {
+        var postResponse = await _client.PostAsJsonAsync("/api/books", CreateValidBook());
+        var created = await postResponse.Content.ReadFromJsonAsync<Book>();
+
+        var updated = new Book
+        {
+            Id = created!.Id,
+            Title = new string('A', 201),
+            Author = "Author",
+            Isbn = "9780306406157",
+            Price = 10.00m,
+            Genre = "Fiction"
+        };
+
+        var response = await _client.PutAsJsonAsync($"/api/books/{created.Id}", updated);
+
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
+
+    [Fact]
+    public async Task Put_WithAuthorExceedingMaxLength_Returns400()
+    {
+        var postResponse = await _client.PostAsJsonAsync("/api/books", CreateValidBook());
+        var created = await postResponse.Content.ReadFromJsonAsync<Book>();
+
+        var updated = new Book
+        {
+            Id = created!.Id,
+            Title = "Title",
+            Author = new string('A', 151),
+            Isbn = "9780306406157",
+            Price = 10.00m,
+            Genre = "Fiction"
+        };
+
+        var response = await _client.PutAsJsonAsync($"/api/books/{created.Id}", updated);
+
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
+
+    [Fact]
+    public async Task Put_WithGenreExceedingMaxLength_Returns400()
+    {
+        var postResponse = await _client.PostAsJsonAsync("/api/books", CreateValidBook());
+        var created = await postResponse.Content.ReadFromJsonAsync<Book>();
+
+        var updated = new Book
+        {
+            Id = created!.Id,
+            Title = "Title",
+            Author = "Author",
+            Isbn = "9780306406157",
+            Price = 10.00m,
+            Genre = new string('A', 51)
+        };
+
+        var response = await _client.PutAsJsonAsync($"/api/books/{created.Id}", updated);
+
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
+
+    [Fact]
+    public async Task Put_WithIsbnContainingLetters_Returns400()
+    {
+        var postResponse = await _client.PostAsJsonAsync("/api/books", CreateValidBook());
+        var created = await postResponse.Content.ReadFromJsonAsync<Book>();
+
+        var updated = new Book
+        {
+            Id = created!.Id,
+            Title = "Title",
+            Author = "Author",
+            Isbn = "978030640615X",
+            Price = 10.00m,
+            Genre = "Fiction"
+        };
+
+        var response = await _client.PutAsJsonAsync($"/api/books/{created.Id}", updated);
+
+        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+    }
+
+    [Fact]
+    public async Task Delete_Twice_SecondReturns404()
+    {
+        var postResponse = await _client.PostAsJsonAsync("/api/books", CreateValidBook());
+        var created = await postResponse.Content.ReadFromJsonAsync<Book>();
+
+        var first = await _client.DeleteAsync($"/api/books/{created!.Id}");
+        first.StatusCode.Should().Be(HttpStatusCode.NoContent);
+
+        var second = await _client.DeleteAsync($"/api/books/{created.Id}");
+        second.StatusCode.Should().Be(HttpStatusCode.NotFound);
+    }
+
+    [Fact]
+    public async Task Post_ResponseContainsAllFieldsCorrectly()
+    {
+        var book = new Book
+        {
+            Title = "Specific Title",
+            Author = "Specific Author",
+            Isbn = "9781234567890",
+            Price = 42.50m,
+            Genre = "Mystery"
+        };
+
+        var response = await _client.PostAsJsonAsync("/api/books", book);
+        var created = await response.Content.ReadFromJsonAsync<Book>();
+
+        created.Should().NotBeNull();
+        created!.Id.Should().BeGreaterThan(0);
+        created.Title.Should().Be("Specific Title");
+        created.Author.Should().Be("Specific Author");
+        created.Isbn.Should().Be("9781234567890");
+        created.Price.Should().Be(42.50m);
+        created.Genre.Should().Be("Mystery");
+    }
+
+    [Fact]
+    public async Task Get_ReturnsJsonContentType()
+    {
+        var response = await _client.GetAsync("/api/books");
+
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        response.Content.Headers.ContentType!.MediaType.Should().Be("application/json");
+    }
 }
